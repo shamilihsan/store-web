@@ -13,17 +13,15 @@ class Home extends Component {
         return (
             this.props.items.map(item => {
                 return (
-                    <div>
-                        <li>{item.name}</li>
-                    </div>
+                    <li key={item._id}>{item.name}</li>
                 )
             })
         )
     }
 
     render() {
-        
-        
+
+
         if (this.props.items === {}) {
             return (
                 <h1>Loading....</h1>
@@ -42,7 +40,6 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.items)
     return {
         items: Object.values(state.items)
     }
