@@ -4,7 +4,6 @@ class Item extends React.Component {
 
     componentDidMount() {
         console.log(this.props.match.params.id);
-        
     }
 
     render() {

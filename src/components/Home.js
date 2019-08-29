@@ -14,7 +14,7 @@ class Home extends Component {
         return (
             this.props.items.map(item => {
                 return (
-                    <Link to={`/shop/${item._id}`}><li key={item._id}>{item.name}</li></Link>
+                    <Link to={`/shop/${item._id}`} key={item._id}><li >{item.name}</li></Link>
                 )
             })
         )

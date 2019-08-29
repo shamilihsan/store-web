@@ -19,24 +19,24 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-    
+
         this.toggle = this.toggle.bind(this);
         this.state = {
-          isOpen: false
+            isOpen: false
         };
-      }
-      toggle() {
+    }
+    toggle() {
         this.setState({
-          isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen
         });
-      }
+    }
 
-      
+
     render() {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <NavbarBrand><Link to={'/'}>reactstrap</Link></NavbarBrand>
+                    <NavbarBrand>reactstrap</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
