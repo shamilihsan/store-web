@@ -3,7 +3,12 @@ import streams from '../apis/store'
 
 export const getItems = () => async dispatch => {
     const response = await streams.get('/items')
-    console.log(response);
     
     dispatch({ type: 'FETCH_ITEMS', payload: response })
+}
+
+export const getItem = id => async dispatch => {
+    const response = await streams.get(`/item/${id}`)
+
+    dispatch({ type: 'FETCH_ITEM', payload: response.data })
 }
