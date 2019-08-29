@@ -8,7 +8,7 @@ import history from '../history'
 
 const App = () => {
     return (
-        <div className="ui container">
+        <div className="container-fluid">
             <Router history={history}>
             <Header />
                 <Switch>

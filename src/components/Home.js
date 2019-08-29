@@ -20,16 +20,17 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.props.items)
 
-
-        if (this.props.items === {}) {
+        if (this.props.items.length === 0) {
+            console.log('test')
             return (
                 <h1>Loading....</h1>
             )
         }
         return (
             <React.Fragment>
-                <h1>HOME PAGE</h1>
+                <h1 className="text-center">HOME</h1>
 
                 <ul>
                     {this.renderItems()}
