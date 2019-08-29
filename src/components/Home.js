@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
 
 import { getItems } from '../actions/';
 
@@ -13,7 +14,7 @@ class Home extends Component {
         return (
             this.props.items.map(item => {
                 return (
-                    <li key={item._id}>{item.name}</li>
+                    <Link to={`/shop/${item._id}`}><li key={item._id}>{item.name}</li></Link>
                 )
             })
         )
