@@ -36,7 +36,7 @@ class Header extends React.Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <NavbarBrand>reactstrap</NavbarBrand>
+                    <Link to={'/'}><div className="">Store</div></Link>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
