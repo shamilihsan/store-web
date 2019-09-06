@@ -21,10 +21,8 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.items)
 
         if (this.props.items.length === 0) {
-            console.log('test')
             return (
                 <h1>Loading....</h1>
             )

@@ -69,7 +69,7 @@ class Item extends React.Component {
                     <div className="card-body">
                         <h5 className="card-title">{item.name}</h5>
                         <h5 className="card-title">{item.description}</h5>
-                        <p className="card-text">{item.price}</p>
+                        <p className="card-text">Rs.{item.price}</p>
                         <a onClick={this.addToCart} className="btn btn-primary text-white">Add to Cart</a>
                     </div>
                 </div>
