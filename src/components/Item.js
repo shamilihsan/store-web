@@ -4,14 +4,6 @@ import { getItem } from '../actions'
 
 class Item extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            total: 0,
-            cartItems: []
-        }
-    }
-
     componentDidMount() {
         this.props.getItem(this.props.match.params.id);
     }
