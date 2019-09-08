@@ -15,7 +15,7 @@ export const getItem = id => async dispatch => {
 }
 
 export const login = formValues => async dispatch => {
-    const response = await store.post('/login', { ...formValues });
+    const response = await store.post('/login');
 
     dispatch({ type: 'LOGIN', payload: response.data })
 }
