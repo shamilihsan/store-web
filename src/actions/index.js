@@ -1,5 +1,4 @@
 import store from '../apis/store'
-import { async } from 'q';
 //import history from '../history';
 
 export const getItems = () => async dispatch => {

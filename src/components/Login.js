@@ -1,20 +1,32 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+
 
 class Login extends React.Component {
+
+    renderInput = ({ input, label, placeholder, type, name }) => {
+        return (
+            <FormGroup>
+                <Label>{label}</Label>
+                <Input type={type} name={name} placeholder={placeholder} onChange={input.onChange} required autoComplete='off' />
+            </FormGroup>
+        )
+
+    }
+
+    onSubmit = formValues => {
+        console.log(formValues);
+    }
+
     render() {
         return (
-            <div className="container d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
-                <h1 className="text-center">Login</h1>
-                <Form>
-                    <FormGroup>
-                        <Label for="exampleEmail">Email</Label>
-                        <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="examplePassword">Password</Label>
-                        <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
-                    </FormGroup>
+            <div className="container d-flex flex-column justify-content-center mx-auto" style={{ height: '100vh', maxWidth: '42em' }}>
+                <h1 className="text-center" style={{ paddingBottom: 20 }}>Login</h1>
+                <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                    <Field name="email" component={this.renderInput} label="Email" placeholder="JohnDoe@gmail.com" type="email" />
+                    <Field name="password" component={this.renderInput} label="Password" placeholder="Password" type="password" />
                     <Button>Submit</Button>
                 </Form>
             </div>
@@ -22,4 +34,8 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+const formWrapped = reduxForm({
+    form: 'login'
+})(Login);
+
+export default connect(null, {})(formWrapped)
