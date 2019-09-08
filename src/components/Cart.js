@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'reactstrap';
 
 class Cart extends React.Component {
 
@@ -22,7 +23,11 @@ class Cart extends React.Component {
 
     }
 
-    renderCart = () => {
+    placeOrder = () => {
+        console.log('Place order')
+    }
+
+    renderCartItems = () => {
 
         return (
             this.state.cart.map(cartItem => {
@@ -55,7 +60,7 @@ class Cart extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderCart()}
+                        {this.renderCartItems()}
                         <tr>
                             <td></td>
                             <td></td>
@@ -64,6 +69,11 @@ class Cart extends React.Component {
                         </tr>
                     </tbody>
                 </table>
+
+                <div className="float-right">
+                    <Button color="success" onClick={this.placeOrder}>Place Order</Button>
+                </div>
+
             </div>
         )
     }
