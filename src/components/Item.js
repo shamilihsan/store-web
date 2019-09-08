@@ -55,7 +55,7 @@ class Item extends React.Component {
 
         return (
             <React.Fragment>
-                <h1 className="text-center" style={{ paddingTop: '50px' }}>{item.name}</h1>
+                <h1 className="text-center" style={{ paddingTop: 100 }}>{item.name}</h1>
                 <div className="card" style={{ width: '18rem' }}>
                     <img src="https://dummyimage.com/600x400/000/fff" className="card-img-top" />
                     <div className="card-body">

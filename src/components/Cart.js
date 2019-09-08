@@ -48,7 +48,7 @@ class Cart extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{ paddingTop: 100 }}>
                 <h1 className="text-center">Cart</h1>
                 <table className="table">
                     <thead>

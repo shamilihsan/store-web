@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { getItems } from '../actions/';
 
@@ -29,7 +29,7 @@ class Home extends Component {
         }
         return (
             <React.Fragment>
-                <h1 className="text-center">HOME</h1>
+                <h1 className="text-center" style={{ paddingTop: 100 }}>HOME</h1>
 
                 <ul>
                     {this.renderItems()}
