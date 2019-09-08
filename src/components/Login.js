@@ -18,7 +18,13 @@ class Login extends React.Component {
     }
 
     onSubmit = formValues => {
-        this.props.login(formValues);
+        this.props.login(formValues, response => {
+            if (response.status === 200) {
+                console.log('Logged In');
+            } else {
+                console.log('Failed')
+            }
+        });
     }
 
     render() {

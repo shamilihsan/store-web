@@ -14,8 +14,12 @@ export const getItem = id => async dispatch => {
     dispatch({ type: 'FETCH_ITEM', payload: response.data })
 }
 
-export const login = formValues => async dispatch => {
-    const response = await store.post('/login');
-
-    dispatch({ type: 'LOGIN', payload: response.data })
+export const login = (formValues, callback) => async dispatch => {
+    //{...formValues} destructures it accordingly i.e ({email: 'sample', password: 'sample'})
+    try {
+        const response = await store.post('/auth/login', { ...formValues });
+        callback(response)
+    } catch(error){
+        callback(error.response)
+    }
 }
