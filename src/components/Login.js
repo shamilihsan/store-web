@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { login } from '../actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
@@ -17,7 +18,7 @@ class Login extends React.Component {
     }
 
     onSubmit = formValues => {
-        console.log(formValues);
+        this.props.login(formValues);
     }
 
     render() {
@@ -38,4 +39,4 @@ const formWrapped = reduxForm({
     form: 'login'
 })(Login);
 
-export default connect(null, {})(formWrapped)
+export default connect(null, { login })(formWrapped)
