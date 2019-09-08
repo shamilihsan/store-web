@@ -41,10 +41,10 @@ class Header extends React.Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                            <Link to={'/cart'} className="nav-link">Cart</Link>
+                                <Link to={'/cart'} className="nav-link">Cart</Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                                <Link to={'/login'} className="nav-link">Login</Link>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>

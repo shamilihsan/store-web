@@ -5,6 +5,7 @@ import Home from './Home'
 import Item from './Item'
 import Header from './Header'
 import Cart from './Cart'
+import Login from './Login'
 import history from '../history'
 
 
@@ -12,10 +13,11 @@ const App = () => {
     return (
         <div className="container-fluid">
             <Router history={history}>
-            <Header />
+                <Header />
                 <Switch>
-                    <Route path="/cart" exact component={Cart}></Route> 
-                    <Route path="/shop/:id" exact component={Item}></Route> 
+                    <Route path="/login" exact component={Login}></Route>
+                    <Route path="/cart" exact component={Cart}></Route>
+                    <Route path="/shop/:id" exact component={Item}></Route>
                     <Route path="/" exact component={Home}></Route>
                 </Switch>
             </Router>
