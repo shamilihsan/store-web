@@ -1,5 +1,4 @@
 import store from '../apis/store'
-import { async } from 'q'
 //import history from '../history';
 
 export const getItems = () => async dispatch => {
@@ -19,7 +18,7 @@ export const login = (formValues, callback) => async dispatch => {
     try {
         const response = await store.post('/auth/login', { ...formValues });
         callback(response)
-    } catch(error){
+    } catch (error) {
         callback(error.response)
     }
 }

@@ -41,8 +41,6 @@ class Login extends React.Component {
                 })
                 localStorage.setItem('accesstoken', response.data.token)
                 localStorage.setItem('user', JSON.stringify(response.data.user))
-
-
             } else {
                 console.log(response.message, 'Failed')
                 this.setState({ isLoading: false, error: true })
