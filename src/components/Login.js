@@ -31,7 +31,8 @@ class Login extends React.Component {
         this.props.login(formValues, response => {
             if (response.status === 200) {
                 this.setState({ isLoading: false, success: true })
-                console.log('Logged In');
+                localStorage.setItem('accesstoken', response.data.token)
+                localStorage.setItem('user', JSON.stringify(response.data.user))
             } else {
                 console.log(response.message, 'Failed')
                 this.setState({ isLoading: false, error: true })
