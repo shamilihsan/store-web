@@ -5,6 +5,8 @@ import { login } from '../actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Alert, Spinner } from 'reactstrap';
 
+import history from '../history';
+
 
 class Login extends React.Component {
 
@@ -30,9 +32,17 @@ class Login extends React.Component {
 
         this.props.login(formValues, response => {
             if (response.status === 200) {
-                this.setState({ isLoading: false, success: true })
+                this.setState({ isLoading: false, success: true }, () => {
+                    setTimeout(() => {
+                        history.push('/')
+                    },
+                        2000
+                    )
+                })
                 localStorage.setItem('accesstoken', response.data.token)
                 localStorage.setItem('user', JSON.stringify(response.data.user))
+
+
             } else {
                 console.log(response.message, 'Failed')
                 this.setState({ isLoading: false, error: true })
@@ -53,7 +63,7 @@ class Login extends React.Component {
                 {
                     this.state.isLoading && <Spinner className="mx-auto" style={{ width: '3rem', height: '3rem', marginTop: 20 }} type="grow" disabled={true} />
                 }
-                
+
 
                 <Alert color="success" isOpen={this.state.success} style={{ marginTop: 20 }}>
                     Logged in successfully
