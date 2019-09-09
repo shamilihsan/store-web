@@ -50,7 +50,7 @@ class Login extends React.Component {
                 </Form>
 
                 {
-                    this.state.isLoading ? <Spinner className="mx-auto" style={{ width: '3rem', height: '3rem', marginTop: 20 }} type="grow" disabled={true} /> : null
+                    this.state.isLoading && <Spinner className="mx-auto" style={{ width: '3rem', height: '3rem', marginTop: 20 }} type="grow" disabled={true} />
                 }
                 
 
