@@ -3,9 +3,16 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { login } from '../actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Alert, Spinner } from 'reactstrap';
 
 
 class Login extends React.Component {
+
+    state = {
+        success: false,
+        error: false,
+        isLoading: false
+    }
 
     renderInput = ({ input, label, placeholder, type, name }) => {
         return (
@@ -18,11 +25,16 @@ class Login extends React.Component {
     }
 
     onSubmit = formValues => {
+
+        this.setState({ success: false, error: false, isLoading: true })
+
         this.props.login(formValues, response => {
             if (response.status === 200) {
+                this.setState({ isLoading: false, success: true })
                 console.log('Logged In');
             } else {
-                console.log('Failed')
+                console.log(response.message, 'Failed')
+                this.setState({ isLoading: false, error: true })
             }
         });
     }
@@ -36,6 +48,19 @@ class Login extends React.Component {
                     <Field name="password" component={this.renderInput} label="Password" placeholder="Password" type="password" />
                     <Button>Submit</Button>
                 </Form>
+
+                {
+                    this.state.isLoading ? <Spinner className="mx-auto" style={{ width: '3rem', height: '3rem', marginTop: 20 }} type="grow" disabled={true} /> : null
+                }
+                
+
+                <Alert color="success" isOpen={this.state.success} style={{ marginTop: 20 }}>
+                    Logged in successfully
+                </Alert>
+
+                <Alert color="danger" isOpen={this.state.error} style={{ marginTop: 20 }}>
+                    Incorrect credentials. Please try again
+                </Alert>
             </div>
         )
     }
