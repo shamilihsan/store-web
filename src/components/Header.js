@@ -40,6 +40,10 @@ class Header extends React.Component {
         });
     }
 
+    logout = () => {
+        localStorage.clear();
+        this.setState({ isLoggedIn: false });
+    }
 
     render() {
         console.log('Test');
@@ -57,7 +61,7 @@ class Header extends React.Component {
                             <NavItem>
                                 {
                                     !this.state.isLoggedIn ? <Link to={'/login'} className="nav-link">Login</Link> :
-                                        <Link to={'/login'} className="nav-link">Logout</Link>
+                                        <NavItem onClick={this.logout} className="nav-link">Logout</NavItem>
                                 }
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
