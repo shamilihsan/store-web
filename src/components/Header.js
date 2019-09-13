@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { } from '../actions'
+import { logout } from '../actions'
 
 import {
     Collapse,
@@ -23,8 +23,7 @@ class Header extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false,
-            isLoggedIn: false
+            isOpen: false
         };
     }
 
@@ -41,8 +40,8 @@ class Header extends React.Component {
     }
 
     logout = () => {
+        this.props.logout();
         localStorage.clear();
-        this.setState({ isLoggedIn: false });
     }
 
     render() {
@@ -60,7 +59,7 @@ class Header extends React.Component {
                             </NavItem>
                             <NavItem>
                                 {
-                                    !this.state.isLoggedIn ? <Link to={'/login'} className="nav-link">Login</Link> :
+                                    !this.props.isLoggedIn ? <Link to={'/login'} className="nav-link">Login</Link> :
                                         <NavItem onClick={this.logout} className="nav-link">Logout</NavItem>
                                 }
                             </NavItem>
@@ -99,4 +98,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, { logout })(Header);
