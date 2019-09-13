@@ -13,12 +13,15 @@ class Cart extends React.Component {
 
     componentDidMount() {
         const cart = JSON.parse(localStorage.getItem('cart'))
+
         this.setState({ cart })
         let total = 0;
+        if (cart) {
+            cart.map(val => {
+                total += val.item.price * val.quantity
+            })
+        }
 
-        cart.map(val => {
-            total += val.item.price * val.quantity
-        })
         this.setState({ total })
 
     }
@@ -47,35 +50,45 @@ class Cart extends React.Component {
     }
 
     render() {
+        if (this.state.cart) {
+            return (
+                <div className="container">
+                    <h1 className="text-center">Cart</h1>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderCartItems()}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="font-weight-bold">{this.state.total}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                    <div className="float-right">
+                        <Button color="success" onClick={this.placeOrder}>Place Order</Button>
+                    </div>
+    
+                </div>
+            )
+        }
+
         return (
             <div className="container">
                 <h1 className="text-center">Cart</h1>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderCartItems()}
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td className="font-weight-bold">{this.state.total}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div className="float-right">
-                    <Button color="success" onClick={this.placeOrder}>Place Order</Button>
-                </div>
-
+                <h4>No items added to cart</h4>
             </div>
         )
+        
     }
 }
 
