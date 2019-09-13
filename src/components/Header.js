@@ -1,14 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import { logout } from '../actions'
 
 import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -25,26 +26,41 @@ class Header extends React.Component {
             isOpen: false
         };
     }
+
+    componentDidMount() {
+        if (localStorage.getItem('user')) {
+            this.setState({ isLoggedIn: true })
+        }
+    }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
 
+    logout = () => {
+        this.props.logout();
+        localStorage.clear();
+    }
 
     render() {
+
         return (
             <div>
-                <Navbar color="light" light expand="md">
+                <Navbar fixed={'top'} color="light" light expand="md">
                     <Link to={'/'}><div className="navbar-brand">Store</div></Link>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                            <Link to={'/cart'} className="nav-link">Cart</Link>
+                                <Link to={'/cart'} className="nav-link">Cart</Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                                {
+                                    !this.props.isLoggedIn ? <Link to={'/login'} className="nav-link">Login</Link> :
+                                        <NavItem onClick={this.logout} className="nav-link">Logout</NavItem>
+                                }
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
@@ -71,4 +87,12 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    const { isLoggedIn } = state.auth
+
+    return {
+        isLoggedIn
+    }
+}
+
+export default connect(mapStateToProps, { logout })(Header);

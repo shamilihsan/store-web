@@ -83,7 +83,7 @@ class Cart extends React.Component {
         }
 
         return (
-            <div className="container">
+            <div className="container" style={{ paddingTop: 100 }}>
                 <h1 className="text-center">Cart</h1>
                 <h4>No items added to cart</h4>
             </div>
