@@ -1,4 +1,4 @@
-let INITIAL_STATE = {}
+var INITIAL_STATE = {}
 
 if(!(localStorage.getItem('user'))) {
     INITIAL_STATE = {
@@ -9,8 +9,6 @@ if(!(localStorage.getItem('user'))) {
         isLoggedIn: true
     }
 }
-
-
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {

@@ -45,7 +45,6 @@ class Header extends React.Component {
     }
 
     render() {
-        console.log('Test');
 
         return (
             <div>
@@ -90,8 +89,6 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     const { isLoggedIn } = state.auth
-    console.log(isLoggedIn, 'logged in?');
-    console.log(localStorage.getItem('user'), 'user')
 
     return {
         isLoggedIn
