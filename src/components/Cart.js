@@ -129,11 +129,4 @@ class Cart extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    console.log(state.order.status, 'Status')
-    return {
-        orderStatus: state.order.status
-    }
-}
-
-export default connect(mapStateToProps, { placeOrder })(Cart);
+export default connect(null, { placeOrder })(Cart);
