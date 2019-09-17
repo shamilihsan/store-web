@@ -44,3 +44,12 @@ export const placeOrder = (email, items, total, callback) => async dispatch => {
 
     }
 }
+
+export const getOrders = () => async dispatch => {
+    const userId = JSON.parse(localStorage.getItem('user'))._id
+    console.log(userId, 'userId');
+
+    const response = await store.get('/order/get-orders', { params: { userId } })
+
+    dispatch({ type: 'FETCH_ORDERS', payload: response })
+}
