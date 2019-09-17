@@ -3,12 +3,18 @@ import { connect } from 'react-redux';
 import { placeOrder } from '../actions'
 import { Button } from 'reactstrap';
 
+import history from '../history';
+
+import { Alert, Spinner } from 'reactstrap';
+
 class Cart extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             loading: false,
+            orderSuccess: false,
+            orderFail: false,
             cart: [],
             total: 0
         }
@@ -33,7 +39,19 @@ class Cart extends React.Component {
         this.setState({ loading: true }, () => {
             const email = JSON.parse(localStorage.getItem('user')).email;
             const { cart, total } = this.state;
-            this.props.placeOrder(email, cart, total)
+
+            this.props.placeOrder(email, cart, total, response => {
+                if (response.status === 201) {
+                    localStorage.setItem('cart', '')
+                    this.setState({ loading: false, orderSuccess: true }, () => {
+                        setTimeout(() => {
+                            history.push('/')
+                        }, 2000)
+                    })
+                } else {
+                    this.setState({ loading: false, orderFail: true })
+                }
+            })
         })
     }
 
@@ -41,7 +59,6 @@ class Cart extends React.Component {
 
         return (
             this.state.cart.map(cartItem => {
-                console.log(cartItem.item);
                 return (
                     <React.Fragment key={cartItem.item._id}>
                         <tr>
@@ -80,11 +97,24 @@ class Cart extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-
-                    <div className="float-right">
-                        <Button color="success" onClick={this.placeOrder}>Place Order</Button>
+                    
+                    <div className="row clearfix text-left">
+                        <div className="float-right">
+                            <Button color="success" onClick={this.placeOrder}>Place Order</Button>
+                        </div>
                     </div>
 
+                    {
+                        this.state.loading && <Spinner className="mx-auto" style={{ width: '3rem', height: '3rem', marginTop: 20 }} type="grow" disabled={true} />
+                    }
+
+                    <Alert color="success" isOpen={this.state.orderSuccess} style={{ marginTop: 20 }}>
+                        Order Successfully Placed
+                    </Alert>
+
+                    <Alert color="danger" isOpen={this.state.orderFail} style={{ marginTop: 20 }}>
+                        Something went wrong, please try again!
+                    </Alert>
                 </div>
             )
         }

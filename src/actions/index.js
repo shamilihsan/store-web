@@ -30,17 +30,17 @@ export const logout = () => dispatch => {
     dispatch({ type: 'LOGOUT' })
 }
 
-export const placeOrder = (email, items, total) => async dispatch => {
+export const placeOrder = (email, items, total, callback) => async dispatch => {
 
     try {
 
         const response = await store.post('/order/add-order', { email, items, total })
 
-        dispatch({ type: 'ORDER_PLACED', payload: response })
+        callback(response)
 
     } catch (error) {
 
-        dispatch({ type: 'ORDER_FAILED', payload: error })
+        callback(error)
 
     }
 }
