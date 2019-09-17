@@ -6,6 +6,7 @@ import Item from './Item'
 import Header from './Header'
 import Cart from './Cart'
 import Login from './Login'
+import Orders from './Orders'
 import history from '../history'
 
 
@@ -15,6 +16,7 @@ const App = () => {
             <Router history={history}>
                 <Header />
                 <Switch>
+                    <Route path="/orders" exact component={Orders}></Route>
                     <Route path="/login" exact component={Login}></Route>
                     <Route path="/cart" exact component={Cart}></Route>
                     <Route path="/shop/:id" exact component={Item}></Route>

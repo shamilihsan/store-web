@@ -60,6 +60,9 @@ class Header extends React.Component {
                                 <Link to={'/cart'} className="nav-link">Cart</Link>
                             </NavItem>
                             <NavItem>
+                                <Link to={'/orders'} className="nav-link">Orders</Link>
+                            </NavItem>
+                            <NavItem>
                                 {
                                     !this.props.isLoggedIn ? <Link to={'/login'} className="nav-link">Login</Link> :
                                         <NavItem onClick={this.logout} className="nav-link">Logout</NavItem>
