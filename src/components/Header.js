@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import history from '../history';
+
 import { logout } from '../actions'
 
 import {
@@ -42,6 +44,7 @@ class Header extends React.Component {
     logout = () => {
         this.props.logout();
         localStorage.clear();
+        history.push('/')
     }
 
     render() {
