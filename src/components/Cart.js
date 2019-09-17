@@ -42,7 +42,7 @@ class Cart extends React.Component {
 
             this.props.placeOrder(email, cart, total, response => {
                 if (response.status === 201) {
-                    localStorage.setItem('cart', '')
+                    localStorage.removeItem('cart')
                     this.setState({ loading: false, orderSuccess: true }, () => {
                         setTimeout(() => {
                             history.push('/')
