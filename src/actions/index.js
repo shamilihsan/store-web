@@ -29,3 +29,18 @@ export const login = (formValues, callback) => async dispatch => {
 export const logout = () => dispatch => {
     dispatch({ type: 'LOGOUT' })
 }
+
+export const placeOrder = (email, items, total) => async dispatch => {
+
+    try {
+
+        const response = await store.post('/order/add-order', { email, items, total })
+
+        dispatch({ type: 'ORDER_PLACED', payload: response })
+
+    } catch (error) {
+
+        dispatch({ type: 'ORDER_FAILED', payload: error })
+
+    }
+}
