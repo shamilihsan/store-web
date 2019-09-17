@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { placeOrder } from '../actions'
 import { Button } from 'reactstrap';
 
 class Cart extends React.Component {
@@ -6,6 +8,7 @@ class Cart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
             cart: [],
             total: 0
         }
@@ -27,7 +30,11 @@ class Cart extends React.Component {
     }
 
     placeOrder = () => {
-        console.log('Place order')
+        this.setState({ loading: true }, () => {
+            const email = JSON.parse(localStorage.getItem('user')).email;
+            const { cart, total } = this.state;
+            this.props.placeOrder(email, cart, total)
+        })
     }
 
     renderCartItems = () => {
@@ -73,11 +80,11 @@ class Cart extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-    
+
                     <div className="float-right">
                         <Button color="success" onClick={this.placeOrder}>Place Order</Button>
                     </div>
-    
+
                 </div>
             )
         }
@@ -88,8 +95,15 @@ class Cart extends React.Component {
                 <h4>No items added to cart</h4>
             </div>
         )
-        
+
     }
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+    console.log(state.order.status, 'Status')
+    return {
+        orderStatus: state.order.status
+    }
+}
+
+export default connect(mapStateToProps, { placeOrder })(Cart);
