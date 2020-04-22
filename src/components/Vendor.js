@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { login } from '../actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
@@ -26,36 +26,59 @@ class Vendor extends React.Component {
 
     }
 
+    renderItems = ({ fields, meta: { error, submitFailed } }) => {
+        return (
+            <React.Fragment>
+                <Button type="button" onClick={() => fields.push({})}>
+                    Add Item
+            </Button>
+                {
+                    fields.map((item, index) => (
+                        <div key={index}>
+                            <Button
+                                type="button"
+                                onClick={() => fields.remove(index)}
+                            >Remove Item</Button>
+                            <h4>item #{index + 1}</h4>
+                            <Field
+                                name={`${item}.firstName`}
+                                type="text"
+                                component={this.renderInput}
+                                label="First Name"
+                            />
+                            <Field
+                                name={`${item}.lastName`}
+                                type="text"
+                                component={this.renderInput}
+                                label="Last Name"
+                            />
+                        </div>
+                    ))
+                }
+            </React.Fragment>
+        );
+    }
+
     onSubmit = formValues => {
 
-        this.setState({ success: false, error: false, isLoading: true })
+        console.log('formValues =>', formValues);
 
-        this.props.login(formValues, response => {
-            if (response.status === 200) {
-                this.setState({ isLoading: false, success: true }, () => {
-                    setTimeout(() => {
-                        history.push('/')
-                    },
-                        2000
-                    )
-                })
-                localStorage.setItem('accesstoken', response.data.token)
-                localStorage.setItem('user', JSON.stringify(response.data.user))
-            } else {
-                console.log(response.message, 'Failed')
-                this.setState({ isLoading: false, error: true })
-            }
-        });
+
     }
 
     render() {
         return (
-            <div className="container d-flex flex-column justify-content-center mx-auto" style={{ height: '100vh', maxWidth: '42em' }}>
+            <div className="container d-flex flex-column justify-content-center mx-auto" style={{ marginTop: '8em', maxWidth: '42em' }}>
                 <h1 className="text-center" style={{ paddingBottom: 20 }}>Sign Up - Vendor</h1>
                 <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                     <Field name="email" component={this.renderInput} label="Email" placeholder="JohnDoe@gmail.com" type="email" />
                     <Field name="password" component={this.renderInput} label="Password" placeholder="Password" type="password" />
+                    <Field name="name" component={this.renderInput} label="Name" placeholder="Vendor Pvt Ltd." type="text" />
+
+                    <FieldArray name="items" component={this.renderItems} />
                     <Button>Submit</Button>
+
+
                 </Form>
 
                 {
@@ -64,11 +87,11 @@ class Vendor extends React.Component {
 
 
                 <Alert color="success" isOpen={this.state.success} style={{ marginTop: 20 }}>
-                    Logged in successfully
+                    Added new vendor
                 </Alert>
 
                 <Alert color="danger" isOpen={this.state.error} style={{ marginTop: 20 }}>
-                    Incorrect credentials. Please try again
+                    Incorrect details. Please try again
                 </Alert>
             </div>
         )
@@ -76,7 +99,7 @@ class Vendor extends React.Component {
 }
 
 const formWrapped = reduxForm({
-    form: 'login'
+    form: 'vendor'
 })(Vendor);
 
 export default connect(null, { login })(formWrapped)
