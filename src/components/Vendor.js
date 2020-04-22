@@ -41,16 +41,22 @@ class Vendor extends React.Component {
                             >Remove Item</Button>
                             <h4>item #{index + 1}</h4>
                             <Field
-                                name={`${item}.firstName`}
+                                name={`${item}.itemName`}
                                 type="text"
                                 component={this.renderInput}
-                                label="First Name"
+                                label="Item Name"
                             />
                             <Field
-                                name={`${item}.lastName`}
+                                name={`${item}.price`}
                                 type="text"
                                 component={this.renderInput}
-                                label="Last Name"
+                                label="Price"
+                            />
+                            <Field
+                                name={`${item}.itemDesc`}
+                                type="text"
+                                component={this.renderInput}
+                                label="Description"
                             />
                         </div>
                     ))
