@@ -53,3 +53,7 @@ export const getOrders = () => async dispatch => {
 
     dispatch({ type: 'FETCH_ORDERS', payload: response })
 }
+
+export const addVendor = (payload) => dispatch => {
+    dispatch({ type: 'ADD_VENDOR', payload })
+}
