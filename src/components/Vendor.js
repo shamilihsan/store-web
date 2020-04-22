@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { login } from '../actions'
+import { addVendor } from '../actions'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { Alert, Spinner } from 'reactstrap'
 
@@ -68,8 +68,8 @@ class Vendor extends React.Component {
     onSubmit = formValues => {
 
         console.log('formValues =>', formValues);
-
-
+        this.props.addVendor(formValues);
+        history.push('/');
     }
 
     render() {
@@ -108,4 +108,4 @@ const formWrapped = reduxForm({
     form: 'vendor'
 })(Vendor);
 
-export default connect(null, { login })(formWrapped)
+export default connect(null, { addVendor })(formWrapped)
