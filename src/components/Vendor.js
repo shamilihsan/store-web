@@ -66,8 +66,6 @@ class Vendor extends React.Component {
     }
 
     onSubmit = formValues => {
-
-        console.log('formValues =>', formValues);
         this.props.addVendor(formValues);
         history.push('/');
     }
