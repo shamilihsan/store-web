@@ -1,3 +1,11 @@
 ### Store Web Application
 
-React web app that uses a NodeJS backend to fetch and create orders which uses MongoDB
+React web app that uses the Store API
+
+## Features
+
+* Login
+* View Items
+* Cart
+* Create Order
+* Fetch previous orders
